@@ -1,0 +1,29 @@
+.person-details {
+	display: flex;
+	margin-top: 0;
+	flex-direction: row;
+	padding: 1rem;
+
+	@media (min-width: 992px) {
+		margin-top: 1rem;
+	}
+}
+
+.person-details .person-image {
+	width: 30%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+.list-group {
+	padding-left: 0;
+}
+
+.person-details .list-group-item span {
+	font-size: .8rem;
+}
+
+.person-details .list-group-item .term {
+	margin-right: .5rem;
+}
