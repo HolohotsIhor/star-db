@@ -15,9 +15,9 @@ export default class RandomPlanet extends Component {
 	};
 
 	// Логика. Погружаем планету
-	constructor() {
-		super(); 
-	}
+	// constructor() {
+	// 	super(); 
+	// }
 
 	// Как только конструктор создан, выполняем. Компонент подключен. 
 	componentDidMount() {

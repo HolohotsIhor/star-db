@@ -3,7 +3,7 @@ export default class SwapiService {
 
 	_apiBase = 'https://swapi.dev/api';
 
-	async getResource(url) {
+	getResource = async (url) => {
 
 		// Получаем ответ сервера
 		const res = await fetch(`${this._apiBase}${url}`);
@@ -16,49 +16,49 @@ export default class SwapiService {
 
 		// Возвращаем тело запроса
 		return await res.json();
-	}
+	};
 
 	// Полуем все данные
-	async getAllPeople() {
+	getAllPeople = async () => {
 		const res = await this.getResource(`/people/`);
 		return res.results.map(this._transformPerson);
-	}
+	};
 
 	// Полуем конкретный id
-	async getPersone(id) {
+	getPersone = async  (id) => {
 		const person = await this.getResource(`/people/${id}/`);
 		return this._transformPerson(person);
-	}
+	};
 
 	// Полуем все планету
-	async getAllPlanets() {
+	getAllPlanets = async () => {
 		const res = await this.getResource(`/planets/`);
 		return res.results.map(this._transformPlanet);
-	}
+	};
 
 	// Полуем планету по id
-	async getPlanet(id) {
+	getPlanet = async (id) => {
 		const planet = await this.getResource(`/planets/${id}/`);
 		return this._transformPlanet(planet);
-	}
+	};
 
 	// Полуем все космические корабли
-	async getAllStarships() {
+	getAllStarships = async () => {
 		const res = await this.getResource(`/starships/`);
 		return res.results.map(this._transformStarship);
-	}
+	};
 
 	// Полуем конкретный корабль id
-	async getStarship(id) {
+	getStarship = async (id) => {
 		const starship = this.getResource(`/starships/${id}/`);
 		return this._transformStarship(starship);
-	}
+	};
 
 	// Получаем id
-	_extractId(item) {
+	_extractId = (item) => {
 		const idRegExp =/\/([0-9]*)\/$/;
 		return item.url.match(idRegExp)[1];
-	}
+	};
 
 	// Принимает планету от api => возвращает объект
 	_transformPlanet = (planet) => {
@@ -92,13 +92,13 @@ export default class SwapiService {
 			id: this._extractId(person),
 			name: person.name,
 			gender: person.gender,
-			birthYear: person.birthYear,
-			eyeColor: person.eyeColor
+			birthYear: person.birth_year,
+			eyeColor: person.eye_color
 		}
 	}
 }
 
-const swapi = new SwapiService();
+// const swapi = new SwapiService();
 
 // swapi.getPersone(3).then((p) => {
 // 	console.log(p.name);

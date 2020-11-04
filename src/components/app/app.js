@@ -3,25 +3,21 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
+import PeoplePage from '../people-page/people-page';
 import ErrorIndicator from '../error-indicator/error-indicator';
+import SwapiService from '../../services/swapi-service';
 
 import './app.css';
 
 export default class App extends Component {
 
+	swapiService = new SwapiService();
+
 	state = {
 		showRandomPlanet: true,
-		selectedPerson: 7,
 		hasError: false
 	};
 
-
-	// Обработка выбора персонажа
-	onPersonSelected = (id) => {
-		this.setState({
-			selectedPerson: id
-		});
-	};
 
 	// Скрываем блок рандомной планеты
 	toggleRandomPlanet = () => {
@@ -66,9 +62,26 @@ export default class App extends Component {
 					Toggle Random Planet
 				</button>
 
+				<PeoplePage />
+				
 				<div className="row mb2">
 					<div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-						<ItemList onItemSelected={this.onPersonSelected} />
+						<ItemList 
+							onItemSelected={this.onPersonSelected} 
+							getData={this.swapiService.getAllPlanets} 
+							renderItem={(item) => (<span>{item.name} <button>!</button></span>)}/>
+					</div>
+					<div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+						<PersonDetails personId={this.state.selectedPerson} />
+					</div>
+				</div>
+
+				<div className="row mb2">
+					<div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+						<ItemList 
+							onItemSelected={this.onPersonSelected} 
+							getData={this.swapiService.getAllStarships} 
+							renderItem={(item) => item.name}/>
 					</div>
 					<div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 						<PersonDetails personId={this.state.selectedPerson} />

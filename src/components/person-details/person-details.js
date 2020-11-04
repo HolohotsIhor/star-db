@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
-import Spinner from '../spinner/spinner';
+// import Spinner from '../spinner/spinner';
 import './person-details.css';
 
 
@@ -12,7 +12,7 @@ export default class PersonalDetails extends Component {
 		person: null
 	};
 
-	// Устанавливаем персонажа как только компонент подгрузился
+	// Устанавливаем персонажа как только компонент подгрузился. Запрашиваем данные
 	componentDidMount() {
 		this.updatePerson();
 	}
